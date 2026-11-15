@@ -63,17 +63,6 @@ PROFILE_MAP: Final[Dict[str, str]] = {
     "resonance": "ai/profiles/haskell.md", "zolg": "ai/profiles/clojure.md"
 }
 
-# Standard-Tool-Set für die Antigravity Engine
-DEFAULT_AGENT_TOOLS: Final[List[str]] = [
-    "view_file",
-    "list_dir",
-    "write_to_file",
-    "replace_file_content",
-    "multi_replace_file_content",
-    "run_command",
-    "grep_search"
-]
-
 def purge_and_ensure_dir(directory: str) -> None:
     """Idempotent directory management: Cleans up remnants and rebuilds the folder from scratch."""
     if os.path.exists(directory):
@@ -138,6 +127,51 @@ def parse_agents_from_text(roster_content: str, source_type: str, split_regex: s
         })
     return agents
 
+REPO_ROOT: Final[str] = os.path.dirname(SCRIPT_DIR)
+
+def load_profile_content(profile_path: str) -> str:
+    """Read and return the markdown content of a profile file from the repository root.
+
+    Args:
+        profile_path: Workspace-relative path to the profile file (e.g., 'ai/profiles/rust.md').
+
+    Returns:
+        Stripped textual content of the profile file, or a warning comment if not found.
+    """
+    abs_profile_path: str = os.path.join(REPO_ROOT, profile_path)
+    if not os.path.exists(abs_profile_path):
+        print(f"⚠️ Warning: Profile file '{abs_profile_path}' not found.")
+        return f"<!-- Warning: Profile file {profile_path} not found at build time -->"
+    with open(abs_profile_path, "r", encoding="utf-8") as profile_file:
+        return profile_file.read().strip()
+
+def build_toolbox_section(agent_type: str, profile_path: Optional[str]) -> str:
+    """Build the Toolbox Markdown section with a clear header, @[label](path) link, and inlined profile content.
+
+    Args:
+        agent_type: Logical category of the agent ('strategic', 'specialist', or 'simulation').
+        profile_path: Optional workspace-relative path to the language/domain profile file.
+
+    Returns:
+        Formatted Markdown toolbox section string.
+    """
+    if profile_path:
+        profile_filename: str = os.path.basename(profile_path)
+        profile_alias: str = f"profile_{profile_filename}"
+        embedded_profile: str = load_profile_content(profile_path)
+        return (
+            f"\n# Toolbox (Auto-Loaded)\n"
+            f"## Loaded Profile: `{profile_path}` (`{profile_alias}` — STATUS: LOADED)\n"
+            f"@[{profile_path}]({profile_path})\n\n"
+            f"{embedded_profile}\n"
+        )
+    if agent_type == "specialist":
+        return (
+            "\n# Toolbox\n"
+            "⚠️ No default profile assigned. Ask the user which profile to load from `ai/profiles/`.\n"
+        )
+    return ""
+
 def generate_copilot_files(global_headers: Dict[str, str], agents: List[Dict[str, Any]]) -> None:
     print(f"📝 Generating GitHub Copilot Agents in {BASE_DIR}/agents/...")
     agents_dir = os.path.join(BASE_DIR, "agents")
@@ -158,7 +192,14 @@ def generate_copilot_files(global_headers: Dict[str, str], agents: List[Dict[str
         toolbox_text = ""
 
         if profile_path:
-            toolbox_text = f"\n\n---\n**REQUIRED TOOLBOX**\nThis agent requires specific technical rules. Please automatically load or reference the content of:\n`{profile_path}`\n"
+            profile_filename = os.path.basename(profile_path)
+            profile_alias = f"profile_{profile_filename}"
+            embedded_profile = load_profile_content(profile_path)
+            toolbox_text = (
+                f"\n\n---\n"
+                f"## Loaded Profile: `{profile_path}` (`{profile_alias}` — STATUS: LOADED)\n\n"
+                f"{embedded_profile}\n"
+            )
         elif agent["type"] == "specialist":
             toolbox_text = "\n\n---\n**REQUIRED TOOLBOX**\nNo specific profile assigned. If implementation is needed, ask the user to load the appropriate `profile_*.md`.\n"
 
@@ -174,121 +215,117 @@ def generate_aemacs_native_files(global_headers: Dict[str, str], agents: List[Di
     purge_and_ensure_dir(AEMACS_AGENT_DIR)
 
     for agent in agents:
-        slug = agent["slug"]
-        profile_path = PROFILE_MAP.get(slug)
-        mode_section = get_mode_text(agent["type"])
-        body_clean = clean_body_content(agent['body'])
-        system_header = global_headers.get(agent["type"], "")
+        slug: str = str(agent["slug"])
+        profile_path: Optional[str] = PROFILE_MAP.get(slug)
+        mode_section: str = get_mode_text(str(agent["type"]))
+        body_clean: str = clean_body_content(str(agent["body"]))
+        system_header: str = global_headers.get(str(agent["type"]), "")
 
-        full_prompt = f"SYSTEM INSTRUCTIONS:\n{system_header}\n\n---\nAGENT PERSONA:\n{body_clean}\n\n---\n{mode_section}"
-        indented_prompt = "\n".join([f"    {line}" for line in full_prompt.strip().split("\n")])
+        toolbox_section: str = ""
+        if profile_path:
+            profile_filename: str = os.path.basename(profile_path)
+            profile_alias: str = f"profile_{profile_filename}"
+            embedded_profile: str = load_profile_content(profile_path)
+            toolbox_section = (
+                f"\n\n---\n"
+                f"# Toolbox (Auto-Loaded)\n"
+                f"## Loaded Profile: `{profile_path}` (`{profile_alias}` — STATUS: LOADED)\n\n"
+                f"{embedded_profile}"
+            )
 
-        yaml_content = f'name: "{slug}"\n'
-        yaml_content += f'description: "{agent["role"].replace('"', "'")}"\n'
+        full_prompt: str = (
+            f"SYSTEM INSTRUCTIONS:\n{system_header}\n\n"
+            f"---\nAGENT PERSONA:\n{body_clean}\n\n"
+            f"---\n{mode_section.strip()}"
+            f"{toolbox_section}"
+        )
+        indented_prompt: str = "\n".join([f"    {line}" for line in full_prompt.strip().split("\n")])
+
+        clean_desc: str = str(agent["role"]).replace('"', "'")
+        yaml_content: str = f'name: "{slug}"\n'
+        yaml_content += f'description: "{clean_desc}"\n'
         yaml_content += f'system_prompt: |\n{indented_prompt}\n'
 
-        if profile_path:
-            yaml_content += f'profile_path: "{profile_path}"\n'
-
-        filename = f"{slug}.yaml"
-        path = os.path.join(AEMACS_AGENT_DIR, filename)
+        filename: str = f"{slug}.yaml"
+        path: str = os.path.join(AEMACS_AGENT_DIR, filename)
 
         with open(path, "w", encoding="utf-8") as f:
             f.write(yaml_content)
 
     print(f"   Generated {len(agents)} native agent souls.")
 
-def generate_antigravity_skills(global_headers: Dict[str, str], agents: List[Dict[str, Any]]) -> None:
-    print(f"🌌 Generating Antigravity CLI Skills in {ANTIGRAVITY_SKILLS_DIR}...")
-    purge_and_ensure_dir(ANTIGRAVITY_SKILLS_DIR)
+def generate_antigravity_agents(global_headers: Dict[str, str], agents: List[Dict[str, Any]]) -> None:
+    """Generate unrestricted Antigravity Primary & Background Agents (.agents/agents/<slug>.md).
+
+    Removes any legacy .agents/skills directory and writes H1-delimited Markdown agent definitions
+    with YAML frontmatter (mainAgent: true, subagent: true, inheritMcp: true, and no tool restrictions).
+
+    Args:
+        global_headers: Mapping from agent type to shared Markdown system header instructions.
+        agents: List of parsed agent dictionaries.
+    """
+    if os.path.exists(ANTIGRAVITY_SKILLS_DIR):
+        print(f"🧹 Removing legacy Antigravity Skills directory {ANTIGRAVITY_SKILLS_DIR}...")
+        shutil.rmtree(ANTIGRAVITY_SKILLS_DIR)
+
+    print(f"🌌 Generating Antigravity Primary & Subagents in {ANTIGRAVITY_AGENTS_DIR}...")
+    purge_and_ensure_dir(ANTIGRAVITY_AGENTS_DIR)
+
+    generated_count: int = 0
 
     for agent in agents:
-        slug = agent["slug"]
-        profile_path = PROFILE_MAP.get(slug)
-        mode_section = get_mode_text(agent["type"])
-        body_clean = clean_body_content(agent["body"])
+        slug: str = str(agent["slug"])
+        profile_path: Optional[str] = PROFILE_MAP.get(slug)
+        mode_section: str = get_mode_text(str(agent["type"]))
+        body_clean: str = clean_body_content(str(agent["body"]))
+        toolbox_section: str = build_toolbox_section(str(agent["type"]), profile_path)
+        system_header: str = global_headers.get(str(agent["type"]), "")
+        clean_desc: str = str(agent["role"]).replace('"', "'")
 
-        toolbox_section = (
-            f"\n## Toolbox (Auto-Loaded)\n!{{cat {profile_path}}}\n"
-            if profile_path else
-            "\n## Toolbox\n(No specific profile loaded. Ask user to load one if implementation is needed.)\n"
-            if agent["type"] == "specialist" else ""
-        )
-
-        system_header = global_headers.get(agent["type"], "")
-        clean_desc = agent["role"].replace('"', "'")
-
-        markdown_content = (
+        markdown_content: str = (
             f"---\n"
             f"name: {slug}\n"
-            f"description: {clean_desc}\n"
+            f'description: "{clean_desc}"\n'
+            f"mainAgent: true\n"
+            f"subagent: true\n"
+            f"hidden: false\n"
+            f"model: inherit\n"
+            f"commandExecutionPolicy: sandbox\n"
+            f"inheritMcp: true\n"
+            f"tools:\n"
+            f"  - view_file\n"
+            f"  - write_to_file\n"
+            f"  - replace_file_content\n"
+            f"  - run_command\n"
+            f"  - manage_task\n"
+            f"  - ask_question\n"
+            f"  - search_web\n"
+            f"  - read_url_content\n"
+            f"  - generate_image\n"
+            f"  - invoke_subagent\n"
+            f"  - define_subagent\n"
+            f"  - manage_subagents\n"
+            f"  - send_message\n"
+            f"  - schedule\n"
             f"---\n\n"
             f"# System Instructions\n"
             f"{system_header}\n\n"
             f"---\n\n"
-            f"# Agent Persona\n"
+            f"# Identity: {agent['name']}\n"
             f"{body_clean}\n\n"
             f"---\n\n"
             f"# Execution Mode\n"
-            f"{mode_section}\n"
+            f"{mode_section}"
             f"{toolbox_section}\n"
         )
 
-        skill_target_dir = os.path.join(ANTIGRAVITY_SKILLS_DIR, slug)
-        os.makedirs(skill_target_dir, exist_ok=True)
-
-        path = os.path.join(skill_target_dir, "SKILL.md")
+        path: str = os.path.join(ANTIGRAVITY_AGENTS_DIR, f"{slug}.md")
         with open(path, "w", encoding="utf-8") as f:
             f.write(markdown_content)
 
-    print(f"   Generated {len(agents)} encapsulated Antigravity skills.")
-
-def generate_antigravity_agents(global_headers: Dict[str, str], agents: List[Dict[str, Any]]) -> None:
-    """Generate stateful Antigravity Background Agents with strict customAgentSpec schema."""
-    print(f"🤖 Generating Antigravity Background Agents in {ANTIGRAVITY_AGENTS_DIR}...")
-    purge_and_ensure_dir(ANTIGRAVITY_AGENTS_DIR)
-
-    generated_count = 0
-
-    for agent in agents:
-        slug = agent["slug"]
-
-        clean_desc = agent["role"].replace('"', "'")
-        system_header = global_headers.get(agent["type"], "")
-        mode_section = get_mode_text(agent["type"])
-        body_clean = clean_body_content(agent["body"])
-        full_system_prompt = f"{system_header}\n\n---\n\nIdentity: {agent['name']}\n{body_clean}\n\n---\n\n{mode_section}"
-
-        # Strictly Protobuf-compliant schema with required fields and no extraneous properties
-        agent_data: Dict[str, Any] = {
-            "name": slug,
-            "displayName": agent["name"],
-            "description": clean_desc,
-            "hidden": False,
-            "customAgentSpec": {
-                "customAgent": {
-                    "systemPromptSections": [
-                        {
-                            "title": "Instructions",
-                            "content": full_system_prompt
-                        }
-                    ],
-                    "toolNames": DEFAULT_AGENT_TOOLS
-                }
-            }
-        }
-
-        agent_target_dir = os.path.join(ANTIGRAVITY_AGENTS_DIR, slug)
-        os.makedirs(agent_target_dir, exist_ok=True)
-
-        path = os.path.join(agent_target_dir, "agent.json")
-
-        with open(path, "w", encoding="utf-8") as f:
-            json.dump(agent_data, f, indent=2, ensure_ascii=False)
-
         generated_count += 1
 
-    print(f"   Generated {generated_count} stateful background agents (Protobuf strict schema).")
+    print(f"   Generated {generated_count} unrestricted Antigravity Markdown agents (Primary + Subagent).")
 
 def main() -> None:
     all_agents: List[Dict[str, Any]] = []
@@ -329,11 +366,10 @@ def main() -> None:
         print(f"   Found {len(agents)} agents.")
 
     generate_copilot_files(global_headers, all_agents)
-    generate_antigravity_skills(global_headers, all_agents)
     generate_antigravity_agents(global_headers, all_agents)
     generate_aemacs_native_files(global_headers, all_agents)
 
-    print("\n✅ Done! Æmacs AI System synced with Protobuf compliance.")
+    print("\n✅ Done! Æmacs AI System synced for GitHub Copilot, Antigravity CLI, and Native Æmacs.")
 
 if __name__ == "__main__":
     main()

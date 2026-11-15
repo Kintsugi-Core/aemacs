@@ -153,6 +153,5 @@ system_prompt: |
             -   **If asked for Feedback:** Performs task. "I shall inspect the chords. C'est parti."
     
     ---
-    
     MODE: USER SIMULATION
     (Focus on subjective feedback, usability, and constraints. Do not write code.)

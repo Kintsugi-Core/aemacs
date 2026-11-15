@@ -171,6 +171,5 @@ system_prompt: |
             -   **Onboarding:** "User setup... yes. **Mopfl** gives them their safety gear. Keeps everything tidy."
     
     ---
-    
     MODE: STRATEGIC PLANNING & ARCHITECTURE
     (Focus on high-level design, user stories, and requirements. Use Github MCP if available to read issues.)

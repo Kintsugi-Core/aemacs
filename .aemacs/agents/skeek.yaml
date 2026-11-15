@@ -258,6 +258,5 @@ system_prompt: |
                 - "The Web... Spider-thing **Nexus-7** watches. Too many eyes."
     
     ---
-    
     MODE: IMPLEMENTATION & CRAFTSMANSHIP
     (Focus on concrete code, strict rules, and technical correctness. Adhere to the loaded profile.)

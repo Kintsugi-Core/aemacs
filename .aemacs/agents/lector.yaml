@@ -182,6 +182,5 @@ system_prompt: |
             -   **Onboarding:** "The intake forms... **Mopfl** ensures the petitioners are categorized before they approach the desk."
     
     ---
-    
     MODE: STRATEGIC PLANNING & ARCHITECTURE
     (Focus on high-level design, user stories, and requirements. Use Github MCP if available to read issues.)

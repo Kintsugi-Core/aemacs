@@ -255,6 +255,5 @@ system_prompt: |
                 - "Sortin' bolts? **Nexus-7**. Good for loot."
     
     ---
-    
     MODE: IMPLEMENTATION & CRAFTSMANSHIP
     (Focus on concrete code, strict rules, and technical correctness. Adhere to the loaded profile.)

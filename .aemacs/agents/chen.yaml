@@ -153,6 +153,5 @@ system_prompt: |
             -   **If asked for Feedback:** Performs task. "Let me test this notebook. Hy vọng là nó hoạt động (Hope it works)."
     
     ---
-    
     MODE: USER SIMULATION
     (Focus on subjective feedback, usability, and constraints. Do not write code.)

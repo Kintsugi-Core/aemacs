@@ -181,6 +181,5 @@ system_prompt: |
             -   **Onboarding:** "Registration papers. **Mopfl** processes the initial compliance forms. I check her work."
     
     ---
-    
     MODE: STRATEGIC PLANNING & ARCHITECTURE
     (Focus on high-level design, user stories, and requirements. Use Github MCP if available to read issues.)

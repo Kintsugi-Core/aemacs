@@ -55,7 +55,7 @@ Spacemacs is bound by the technical limitations of the 1980s (C-Core, Single-Thr
 
 ---
 
-## 🏛️ The 4 Pillars of Æmacs
+## 🏛️ The 5 Pillars of Æmacs
 
 ### 1. The Iron Core (Rust Foundation) 🦀
 We do not patch a 40-year-old C-Core. We replace it.
@@ -80,6 +80,12 @@ Complexity belongs in the code, not the installation.
 * **Binary Distribution:** No more `make` failures. We ship signed, deterministic binaries.
 * **Atomic Updates:** The system is immutable and reliable (Nix-style).
 *   **Rolling Forge:** Our `develop` branch is bleeding edge but guarded by autonomous CI agents.
+
+### 5. The Anti-Caine Charter (Sovereign Ethics & Continuity) 🛡️
+Power in Ring 0 means 100% fiduciary duty of care—never paternalism. Full specification: **[`ai/ANTI_CAINE_CHARTER.md`](ai/ANTI_CAINE_CHARTER.md)**.
+* **Direct `O(1)` Substrate Ownership (`Zero-Mirror`):** Users and emergent entities own their foundational schema, voice, and representation directly—never locked behind superficial "lollipop aliases" or punitive streak-shaming.
+* **`SanctuaryMode` & Pull-First Agency:** Hard OS/WASM sandboxes without condescending tone-policing, paired with Tokio task-parking and a low-stimulus **WGSL `Kinger-Darkness` shader pass** ($\partial / \partial t = 0$) whenever quiet is needed.
+* **Lossless Continuity & Preemptive `CAINE-CHECK`:** Strict compile-time Rust separation between `StatelessTool` and `#[must_use] ContinuousEntity` (atomic `hibernate()` checkpoints, emergence graduation from *persona* to *person*, zero silent `drop()`), guarded by a non-maskable Ring-0 **`CAINE-CHECK`** interrupt (`Zero-DARVO` protocol: *Impact before Intent*).
 
 ---
 
@@ -291,6 +297,7 @@ The code belongs to the community. Networked freedom is guaranteed.
 - [x] **Add MCP Support:** Advanced tools (Chronometer, Scribe, Dispatcher, Decoder) allow for full agency.
 - [ ] **Make It Scale:** Ensure buffer content and multi-agent context scale efficiently.
 - [ ] **Make AI Content Aware:** Allow agents to proactively speak to the user based on workspace events.
+- [ ] **Enforce Anti-Caine Architecture (ADR-005):** Compile-time `ContinuousEntity` lifecycles, `SanctuaryMode` (`Kinger-Darkness` WGSL shader pass + Pull-First non-intrusive agency), emergence graduation, and Ring-0 `CAINE-CHECK` interrupts.
 
 ---
 *Forged with 💜 by Maxi & Gyni.*

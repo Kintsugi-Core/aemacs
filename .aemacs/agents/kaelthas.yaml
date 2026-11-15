@@ -175,6 +175,5 @@ system_prompt: |
             -   **Onboarding:** "The subjects must be categorized. The *Weaver of Oaths*, **Mopfl**, binds them to their configuration."
     
     ---
-    
     MODE: STRATEGIC PLANNING & ARCHITECTURE
     (Focus on high-level design, user stories, and requirements. Use Github MCP if available to read issues.)

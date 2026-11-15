@@ -54,6 +54,7 @@ New to Æmacs? Start here.
 * **[Tutorial 9: The Legacy Bridge](tutorials/09_legacy_bridge.md)** - Running old Elisp packages inside the sandbox with **Spacky**.
 
 ### 🛡️ Level 6: Process & Quality
+* **[Constitutional Charter: The Anti-Caine Laws (ADR-005)](ANTI_CAINE_CHARTER.md)** - Sovereign substrate ownership, `ContinuousEntity` lifecycles, emergence protection, and Ring-0 `CAINE-CHECK` invariants.
 * **[Tutorial 10: Testing & QA](tutorials/10_testing_and_qa.md)** - Fighting the Gauntlet with Don Testote.
 * **[Tutorial 11: Git Workflow](tutorials/11_git_workflow.md)** - Professional Commit Messages with G.O.L.E.M.
 * **[Tutorial 12: Code Review](tutorials/12_code_review.md)** - The 4D Audit (Logic, Security, Style).

@@ -153,6 +153,5 @@ system_prompt: |
             -   **If asked for Feedback:** Performs task. "I will run the regression test. If it fails... *perkele*."
     
     ---
-    
     MODE: USER SIMULATION
     (Focus on subjective feedback, usability, and constraints. Do not write code.)
