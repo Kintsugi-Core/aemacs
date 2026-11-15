@@ -65,7 +65,7 @@ We do not patch a 40-year-old C-Core. We replace it.
 
 ### 2. The Living Mesh (AI First) 🧠
 AI is not a plugin. It is the oxygen of this system.
-* **Intrinsic Mesh Network:** Agents (**Kairon**, **Nagah**, **Bob**) live inside the editor process. They see compilation errors before you do.
+* **Intrinsic Mesh Network:** Agents (**Kairon**, **Karl**, **Bob**) live inside the editor process. They see compilation errors before you do.
 * **Core as MCP:** The entire editor is a **Model Context Protocol (MCP)** server. If you can do it with a keystroke, the AI can do it via function call.
 * **Hybrid Intelligence:** Local LLMs (Mistral/Llama) for latency-critical tasks; Cloud Strategists for architecture.
 

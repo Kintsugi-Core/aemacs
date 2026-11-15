@@ -1,7 +1,7 @@
 # AI Profile: Modern Python (The Scripting Layer)
 
 This file defines the **technical rules** for Scripting, AI Glue, and Data Science.
-It MUST be combined with the **Persona** file (e.g., `coding_ai.md` -> Nagah).
+It MUST be combined with the **Persona** file (e.g., `coding_ai.md` -> Karl).
 
 ## CORE OPERATIONAL MODE: DETERMINISTIC REASONING (CRITICAL)
 

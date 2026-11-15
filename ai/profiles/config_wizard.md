@@ -70,7 +70,7 @@ UserConfig(
         features: Features(
             lsp: Heavy,      // Using all resources.
             git: Magit,      // The only correct choice.
-            ai_mesh: true,   // Nagah is watching.
+            ai_mesh: true,   // Karl is watching.
         ),
 
         // Final note

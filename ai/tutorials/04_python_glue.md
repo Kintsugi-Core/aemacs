@@ -10,7 +10,7 @@
 
 ## 🎭 Your AI Crew for this Job
 
-1.  **Nagah (The Serpent):** She writes elegant, vectorized Python code. She hates loops.
+1.  **Karl (The Serpent):** She writes elegant, vectorized Python code. She hates loops.
 2.  **Dr. Chen (Data Scientist):** He validates that the tool is actually useful for science.
 
 ---
@@ -33,9 +33,9 @@ Dr. Chen: *"If it destroys my NaN values, I will riot. It must handle ISO8601 da
 ## Step 2: The Script (Vectorized Logic)
 
 **Your Task:**
-Switch to **Nagah**.
+Switch to **Karl**.
 
-> **Command:** `/nagah`
+> **Command:** `/karl`
 > **Prompt:** "Write a Python function `tidy_csv(content: str) -> str`.
 > 1. Use `pandas` to read the CSV string.
 > 2. Sort by 'Date'.
@@ -43,7 +43,7 @@ Switch to **Nagah**.
 > **Constraint:** Use vectorization, no for-loops!"
 
 **Result:**
-Nagah glides through the logic:
+Karl glides through the logic:
 
 ```python
 import pandas as pd
@@ -78,5 +78,5 @@ Kairon shows the registration hook in `capabilities.toml`.
 
 You have:
 1.  Validated needs (**Dr. Chen**).
-2.  Written high-performance Python (**Nagah**).
+2.  Written high-performance Python (**Karl**).
 3.  Integrated it seamlessly.

@@ -28,7 +28,7 @@
 ** Primary user
 [Who uses this capability?]
 ** Secondary stakeholders
-[List the MAS team members: Freut, Bob, Don, Kairon/Nagah and their responsibilities.]
+[List the MAS team members: Freut, Bob, Don, Kairon/Karl and their responsibilities.]
 
 * Frozen product decisions
 [List D1, D2, D3... Constraints and decisions that are no longer open for debate.]

@@ -11,7 +11,7 @@ In Æmacs, a Theme is not just a list of hex codes. It is a **Struct**. We use a
 ## 🎭 Your AI Crew for this Job
 
 1.  **Magos Pixelis:** Ensures the contrast ratio is compliant (WCAG AA).
-2.  **Nagah (Python):** We use Python to *generate* the Rust theme structs from a JSON palette (because writing structs by hand is tedious).
+2.  **Karl (Python):** We use Python to *generate* the Rust theme structs from a JSON palette (because writing structs by hand is tedious).
 
 ---
 
@@ -20,15 +20,15 @@ In Æmacs, a Theme is not just a list of hex codes. It is a **Struct**. We use a
 **Scenario:** You have the hex codes: Pink (`#D60270`), Purple (`#9B4F96`), Blue (`#0038A8`).
 
 **Your Task:**
-Use **Nagah**.
+Use **Karl**.
 
-> **Command:** `/nagah`
+> **Command:** `/karl`
 > **Prompt:** "I have these 3 base colors.
 > Generate a `palette.json` that expands them into a full UI scale (Bg, Fg, Border, Surface).
 > Use `colormath` to generate 5 shades of each."
 
 **Result:**
-Nagah weaves the colors:
+Karl weaves the colors:
 
 ```json
 {
@@ -81,6 +81,6 @@ Kairon runs the build script and generates the zero-cost struct.
 ## 🎉 Summary
 
 You have:
-1.  Generated a palette algorithmically (**Nagah**).
+1.  Generated a palette algorithmically (**Karl**).
 2.  Verified accessibility (**Magos**).
 3.  Compiled it for performance (**Kairon**).

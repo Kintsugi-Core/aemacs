@@ -2,7 +2,7 @@
 
 Æmacs is an "AI Native" editor. We don't just call APIs; we run a local Multi-Agent System (MAS). This tutorial shows you how to script the brain.
 
-**Goal:** Create a custom Python script that analyzes your code history using **Nagah**.
+**Goal:** Create a custom Python script that analyzes your code history using **Karl**.
 **Time:** approx. 20 minutes.
 **Prerequisite:** `uv`, `python 3.12`.
 
@@ -10,7 +10,7 @@
 
 ## 🎭 Your AI Crew for this Job
 
-1.  **Nagah (The Serpent):** The Python Specialist. She writes the glue code, handles dataframes, and manages the context window.
+1.  **Karl (The Serpent):** The Python Specialist. She writes the glue code, handles dataframes, and manages the context window.
 2.  **Kael'Thas (Project Owner):** Defines the permissions (what can the AI read?).
 
 ---
@@ -20,16 +20,16 @@
 **Scenario:** You want an AI agent that scans your git history and summarizes your "coding mood" (e.g., are you committing angry messages?).
 
 **Your Task:**
-Use **Nagah**.
+Use **Karl**.
 
-> **Command:** `/nagah`
+> **Command:** `/karl`
 > **Prompt:** "I want a Python script for the AI Mesh.
 > 1. Use `gitpython` to read the last 50 commit messages.
 > 2. Use `textblob` or a local LLM to analyze sentiment.
 > 3. Return a JSON object with the 'Mood Score'."
 
 **Result:**
-Nagah glides through the implementation:
+Karl glides through the implementation:
 
 ```python
 import git
@@ -76,6 +76,6 @@ permissions = ["read_git"]
 ## 🎉 Summary
 
 You have:
-1.  Scripted logic in Python (**Nagah**).
+1.  Scripted logic in Python (**Karl**).
 2.  Bridged it to the Rust Core (**Kairon**).
 3.  Created a new AI Feature.

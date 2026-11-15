@@ -39,8 +39,8 @@ New to Æmacs? Start here.
 * **[Tutorial 2: Extending with WASM](tutorials/02_wasm_plugins.md)** - Writing safe, high-speed plugins in Rust/WASM.
 
 ### 🧠 Level 2: The Neural Mesh (AI Integration)
-* **[Tutorial 3: The AI Mesh](tutorials/03_ai_mesh.md)** - How to use the unified agent system (Kairon, Nagah).
-* **[Tutorial 4: Python Scripting](tutorials/04_python_glue.md)** - Using **Nagah** to write data science scripts and glue code.
+* **[Tutorial 3: The AI Mesh](tutorials/03_ai_mesh.md)** - How to use the unified agent system (Kairon, Karl).
+* **[Tutorial 4: Python Scripting](tutorials/04_python_glue.md)** - Using **Karl** to write data science scripts and glue code.
 
 ### ⚡ Level 3: High-Performance Services (Go & Backend)
 * **[Tutorial 5: Cloud Sync](tutorials/05_cloud_sync.md)** - Building backend services with **Bwah** (Go).
@@ -93,7 +93,7 @@ sequenceDiagram
 ## The "Iron Core" Architecture
 The framework is built on the **Artisan + Toolbox** model.
 
-1.  **The Artisan (`coding_ai.md`):** The Persona (e.g., **Kairon**, **Nagah**). Defines *behavior*.
+1.  **The Artisan (`coding_ai.md`):** The Persona (e.g., **Kairon**, **Karl**). Defines *behavior*.
 2.  **The Toolbox (`ai/profiles/*.md`):** The Technical Rules (e.g., `rust.md`). Defines *constraints*.
 
 **You must always provide both!** (The system does this automatically via `sync-agents.py`).
@@ -124,7 +124,7 @@ The framework is built on the **Artisan + Toolbox** model.
 | Agent Name      | Role            | Primary Task                      | Toolbox (in `ai/profiles/`) |
 |:----------------|:----------------|:----------------------------------|:----------------------------|
 | **Kairon**      | Rust Core       | Kernel, GPUI, WASM Host.          | `rust.md`                   |
-| **Nagah**       | Python/AI       | AI Glue & Scripts.                | `python.md`                 |
+| **Karl**        | Python/AI       | AI Glue & Scripts.                | `python.md`                 |
 | **Bwah**        | Backend (Go)    | Microservices & Sync.             | `go.md`                     |
 | **Resonance**   | Logic (Haskell) | Parsers & Verification.           | `haskell.md`                |
 | **Zolg**        | Apps (Clojure)  | Rich Data Applications.           | `clojure.md`                |
@@ -155,7 +155,7 @@ The framework is built on the **Artisan + Toolbox** model.
 2.  **Interact:**
     * Need a plan? -> `/bob`
     * Need Rust code? -> `/kairon`
-    * Need Python? -> `/nagah`
+    * Need Python? -> `/karl`
     * Need to fix Legacy? -> `/spacky`
 
 ## ⚙️ AI Framework Maintenance (The Build Pipeline)

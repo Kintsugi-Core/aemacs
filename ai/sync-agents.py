@@ -48,7 +48,7 @@ NAME_MAPPING: Final[Dict[str, str]] = {
     "kallista": "kallista", "mopfl": "mopfl", "einafetz": "mopfl",
     "spacky": "spacky", "bzzrts": "bzzrts", "vala": "vala", "nexus": "nexus",
     "marjin": "marjin", "dok": "dok", "golem": "golem", "skeek": "skeek",
-    "don": "don", "kairon": "kairon", "nagah": "nagah", "bwah": "bwah",
+    "don": "don", "kairon": "kairon", "karl": "karl", "bwah": "bwah",
     "resonance": "resonance", "haskell": "resonance", "zolg": "zolg",
     "clojure": "zolg", "chen": "chen", "vlad": "vlad", "serge": "serge",
     "noobie": "noobie", "sarah": "sarah"
@@ -59,7 +59,7 @@ PROFILE_MAP: Final[Dict[str, str]] = {
     "bzzrts": "ai/profiles/gfx.md", "nexus": "ai/profiles/layers.md",
     "vala": "ai/profiles/ci_github.md", "don": "ai/profiles/rust_testing.md",
     "golem": "ai/profiles/doc.md", "kairon": "ai/profiles/rust.md",
-    "nagah": "ai/profiles/python.md", "bwah": "ai/profiles/go.md",
+    "karl": "ai/profiles/python.md", "bwah": "ai/profiles/go.md",
     "resonance": "ai/profiles/haskell.md", "zolg": "ai/profiles/clojure.md"
 }
 
