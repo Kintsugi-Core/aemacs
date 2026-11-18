@@ -10,7 +10,7 @@
 
 ## 🎭 Your AI Crew for this Job
 
-1.  **Karl (The Serpent):** The Python Specialist. She writes the glue code, handles dataframes, and manages the context window.
+1.  **Karl (The Barefoot Crawler):** The Python Specialist. He writes blast-proof glue code, handles dataframes, and manages the context window.
 2.  **Kael'Thas (Project Owner):** Defines the permissions (what can the AI read?).
 
 ---
@@ -29,7 +29,7 @@ Use **Karl**.
 > 3. Return a JSON object with the 'Mood Score'."
 
 **Result:**
-Karl glides through the implementation:
+Karl clears the floor with a clean implementation:
 
 ```python
 import git

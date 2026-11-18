@@ -10,7 +10,7 @@
 
 ## 🎭 Your AI Crew for this Job
 
-1.  **Karl (The Serpent):** She writes elegant, vectorized Python code. She hates loops.
+1.  **Karl (The Barefoot Crawler):** He writes blast-proof, vectorized Python code. He hates nested loops and untyped traps.
 2.  **Dr. Chen (Data Scientist):** He validates that the tool is actually useful for science.
 
 ---
@@ -43,7 +43,7 @@ Switch to **Karl**.
 > **Constraint:** Use vectorization, no for-loops!"
 
 **Result:**
-Karl glides through the logic:
+Karl wires up the vectorized logic:
 
 ```python
 import pandas as pd

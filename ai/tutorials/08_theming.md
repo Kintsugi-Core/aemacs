@@ -28,7 +28,7 @@ Use **Karl**.
 > Use `colormath` to generate 5 shades of each."
 
 **Result:**
-Karl weaves the colors:
+Karl generates the palette cleanly:
 
 ```json
 {
